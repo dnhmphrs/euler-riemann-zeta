@@ -29,6 +29,10 @@
 			href: '/'
 		},
 		{
+			name: 'Euler-Riemann Zeta - Tangent (adapted)',
+			href: '/adapted'
+		},
+		{
 			name: 'Euler-Riemann Zeta - Real Part',
 			href: '/euler-riemann-zeta-real'
 		},

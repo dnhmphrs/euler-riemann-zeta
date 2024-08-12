@@ -9,6 +9,12 @@ const float CRITICAL_LINE = 0.5; // The real part of s on the critical line
 const float ZERO_LINE = 0.0; // The real part of s at 0
 const float ONE_LINE = 1.0; // The real part of s at 1
 
+const float initial0 = -0.5772156649;
+const float gap0 = -3.14159;
+
+const float HORIZONTAL_1 = initial0; // 
+const float HORIZONTAL_2 = gap0; // 
+
 // const float initial1 = 3.14159 * 0.5;
 // const float gap1 = initial1 * 2.0;
 
@@ -41,7 +47,6 @@ const float LINE_NEG_F = -initial1 - 5.0 * gap1; // The real part of s at 0
 float zeta(float sigma, float t) {
     float sum = 0.0;
     const int N = 100; // Number of terms in the series for approximation
-
     for (int n = 1; n <= N; ++n) {
         float term = pow(float(n), -sigma);
         float angle = -t * log(float(n));
@@ -67,13 +72,17 @@ void main() {
 
     // Create gradients for visualization
     vec3 gradient1 = mix(color1, color2, normalizedZeta);
-    vec3 gradient2 = mix(color3, gradient1, 0.5 + 0.5 * sin(normalizedZeta * 3.14159));
+    vec3 gradient2 = mix(color3, gradient1, sin(normalizedZeta));
 
     // Draw the critical strip
     float lineThickness = 0.0002; // Thickness of the line
     float criticalLinePosition = (CRITICAL_LINE + half_scale) / scale; // Normalize the critical line position
     float zeroLinePosition = (ZERO_LINE + half_scale) / scale; // Normalize the zero line position
     float oneLinePosition = (ONE_LINE + half_scale) / scale; // Normalize the one line position
+
+    // Horizontal lines positions
+    float horizontal1Position = (HORIZONTAL_1 + half_scale) / scale;
+    float horizontal2Position = (HORIZONTAL_2 + half_scale) / scale;
 
     // Vertical lines positions
     float lineAPosition = (LINE_A + half_scale) / scale;
@@ -107,6 +116,15 @@ void main() {
     // Highlight the one line
     if (abs(vUv.y - oneLinePosition) < lineThickness) {
         gradient2 = mix(color3, vec3(0.0, 0.0, 0.0), 0.7); // Black line for one
+    }
+
+    // Highlight the horizontal lines
+    if (abs(vUv.y - horizontal1Position) < lineThickness) {
+        gradient2 = mix(color3, vec3(0.0, 0.0, 0.0), 0.7);
+    }
+
+    if (abs(vUv.y - horizontal2Position) < lineThickness) {
+        gradient2 = mix(color3, vec3(0.0, 0.0, 0.0), 0.7);
     }
 
     // Highlight the vertical lines - 1
