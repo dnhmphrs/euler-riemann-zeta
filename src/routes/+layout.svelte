@@ -46,7 +46,7 @@
 </script>
 
 <svelte:head>
-	<title>RIEMANN THETA</title>
+	<title>EULER RIEMANN ZETA</title>
 	<meta name="description" content="" />
 	<meta name="keywords" content="" />
 	<meta name="author" content="AUFBAU" />

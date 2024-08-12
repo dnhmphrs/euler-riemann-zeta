@@ -7,26 +7,35 @@
 	// import { page } from '$app/stores';
 	// import { goto } from '$app/navigation';
 
-	$: showMatrix = ['/', '/kp-equation', '/tangent-lattice'].includes($page.url.pathname);
-
+	// $: showMatrix = ['/', '/kp-equation', '/tangent-lattice'].includes($page.url.pathname);
+	$: showMatrix = false;
+	
 	// stub data out
 	const navItems = [
+		// {
+		// 	name: 'Riemann Theta - Real Part (N=2)',
+		// 	href: '/'
+		// },
+		// {
+		// 	name: 'KP Equation (N=2)',
+		// 	href: '/kp-equation'
+		// },
+		// {
+		// 	name: 'Theta - Tangent Lattice (N=1)',
+		// 	href: '/tangent-lattice'
+		// },
 		{
-			name: 'Riemann Theta - Real Part (N=2)',
+			name: 'Euler-Riemann Zeta - Tangent',
 			href: '/'
 		},
 		{
-			name: 'KP Equation (N=2)',
-			href: '/kp-equation'
+			name: 'Euler-Riemann Zeta - Real Part',
+			href: '/euler-riemann-zeta-real'
 		},
 		{
-			name: 'Theta - Tangent Lattice (N=1)',
-			href: '/tangent-lattice'
-		},
-		{
-			name: 'Euler-Riemann Zeta - Tangent',
-			href: '/euler-riemann-zeta'
-		}
+			name: 'Euler-Riemann Zeta - Imangiary Part',
+			href: '/euler-riemann-zeta-imaginary'
+		},	
 	];
 
 	// let toggleDarkMode = () => {

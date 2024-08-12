@@ -9,11 +9,8 @@ const float CRITICAL_LINE = 0.5; // The real part of s on the critical line
 const float ZERO_LINE = 0.0; // The real part of s at 0
 const float ONE_LINE = 1.0; // The real part of s at 1
 
-// const float initial1 = 3.14159 * 0.5;
-// const float gap1 = initial1 * 2.0;
-
 const float initial1 = 2.26658;
-const float gap1 = initial1 * 2.0;
+const float gap1 = 4.53316;
 
 const float LINE_A = initial1; // The real part of s at 0
 const float LINE_NEG_A = -initial1; // The real part of s at 0
@@ -41,10 +38,11 @@ const float LINE_NEG_F = -initial1 - 5.0 * gap1; // The real part of s at 0
 float zeta(float sigma, float t) {
     float sum = 0.0;
     const int N = 100; // Number of terms in the series for approximation
+
     for (int n = 1; n <= N; ++n) {
         float term = pow(float(n), -sigma);
         float angle = -t * log(float(n));
-        sum += term * tan(angle); // Tangent part
+        sum += term * cos(angle); // Tangent part
     }
 
     return sum;
