@@ -10,8 +10,8 @@
 	import vertexShader from './shaders/vertexShader-three.glsl';
 	import fragmentShader_euler_riemann_zeta from './shaders/eulerRiemannZetaFrag.glsl';
 	import fragmentShader_euler_riemann_zeta_functional from './shaders/eulerRiemannZetaFrag-functional.glsl';
-	import fragmentShader_euler_riemann_zeta_real from './shaders/eulerRiemannZetaRealFrag.glsl';
-	import fragmentShader_euler_riemann_zeta_imaginary from './shaders/eulerRiemannZetaImaginaryFrag.glsl';
+	import fragmentShader_euler_riemann_zeta_real from './shaders/eulerRiemannZetaFrag-real.glsl';
+	import fragmentShader_euler_riemann_zeta_imaginary from './shaders/eulerRiemannZetaFrag-imaginary.glsl';
 	import fragmentShader_euler_riemann_zeta_projective from './shaders/eulerRiemannZetaFrag-projective.glsl';
 
 
