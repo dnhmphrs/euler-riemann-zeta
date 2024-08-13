@@ -2,7 +2,16 @@
 	import Nav from './nav.svelte';
 	import { page } from '$app/stores';
 	import Matrix from './matrix.svelte';
+	import { mouseOverHeader } from '$lib/store/store';
 	// import { darkMode, screenType } from '$lib/store/store';
+
+	function handleMouseOver() {
+		mouseOverHeader.set(true);
+	}
+
+	function handleMouseOut() {
+		mouseOverHeader.set(false);
+	}
 
 	// import { page } from '$app/stores';
 	// import { goto } from '$app/navigation';
@@ -12,18 +21,6 @@
 	
 	// stub data out
 	const navItems = [
-		// {
-		// 	name: 'Riemann Theta - Real Part (N=2)',
-		// 	href: '/'
-		// },
-		// {
-		// 	name: 'KP Equation (N=2)',
-		// 	href: '/kp-equation'
-		// },
-		// {
-		// 	name: 'Theta - Tangent Lattice (N=1)',
-		// 	href: '/tangent-lattice'
-		// },
 		{
 			name: 'Euler-Riemann Zeta - Tangent',
 			href: '/'
@@ -52,7 +49,7 @@
 	// 	};
 </script>
 
-<header>
+<header on:mouseover={handleMouseOver} on:mouseout={handleMouseOut} on:focus={handleMouseOver} on:blur={handleMouseOut}>
 	<main>
 		<div />
 		{#if showMatrix}

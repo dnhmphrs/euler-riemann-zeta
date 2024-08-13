@@ -1,6 +1,6 @@
 <script>
 	import { onMount, onDestroy  } from 'svelte';
-	import { screenType, mousePosition } from '$lib/store/store';
+	import { screenType, mousePosition, mouseOverHeader } from '$lib/store/store';
 	import { page } from '$app/stores';
 	import { afterNavigate } from '$app/navigation';
 
@@ -305,15 +305,19 @@
 	}
 
 	function onDocumentMouseMove(event) {
-    var clientX = event.clientX;
-    var clientY = event.clientY;
+		if ($mouseOverHeader) {
+			mouse.x = 0;
+			mouse.y = 0;
+		} else {
+			var clientX = event.clientX;
+			var clientY = event.clientY;
 
-    mouse.x = (clientX / window.innerWidth) * 2 - 1;
-		mouse.y = -(clientY / window.innerHeight) * 2 + 1;
-
+			mouse.x = (clientX / window.innerWidth) * 2 - 1;
+			mouse.y = -(clientY / window.innerHeight) * 2 + 1;
+		}
+		
 		// update store
 		mousePosition.set(mouse);
-
 	};
 
 	function animate() {
