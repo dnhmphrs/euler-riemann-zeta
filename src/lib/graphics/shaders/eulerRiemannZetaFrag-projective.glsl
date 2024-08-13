@@ -44,7 +44,7 @@ void main() {
 
     // Create gradients for visualization
     vec3 gradient1 = mix(color1, color2, normalizedZeta);
-    vec3 gradient2 = mix(color3, gradient1, 0.5 + 0.5 * sin(normalizedZeta * 3.14159));
+    vec3 gradient2 = mix(color3, gradient1, 0.5 + 0.5 * sin(normalizedZeta));
 
     gl_FragColor = vec4(gradient2, 1.0);
 }

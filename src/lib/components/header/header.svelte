@@ -18,7 +18,7 @@
 
 	// $: showMatrix = ['/', '/kp-equation', '/tangent-lattice'].includes($page.url.pathname);
 	$: showMatrix = false;
-	
+
 	// stub data out
 	const navItems = [
 		{
@@ -30,7 +30,7 @@
 			href: '/projective'
 		},
 		{
-			name: 'Functional Equation - Tangent - Mobius',
+			name: 'Functional Equation - Real Part - Mobius',
 			href: '/functional'
 		},
 		{
@@ -40,7 +40,7 @@
 		{
 			name: 'Imangiary Part  - Mobius',
 			href: '/imaginary'
-		},	
+		}
 	];
 
 	// let toggleDarkMode = () => {
@@ -49,7 +49,12 @@
 	// 	};
 </script>
 
-<header on:mouseover={handleMouseOver} on:mouseout={handleMouseOut} on:focus={handleMouseOver} on:blur={handleMouseOut}>
+<header
+	on:mouseover={handleMouseOver}
+	on:mouseout={handleMouseOut}
+	on:focus={handleMouseOver}
+	on:blur={handleMouseOut}
+>
 	<main>
 		<div />
 		{#if showMatrix}

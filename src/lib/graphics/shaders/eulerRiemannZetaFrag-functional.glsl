@@ -17,13 +17,18 @@ float zeta(float sigma, float t) {
     for (int n = 1; n <= N; ++n) {
         float term = pow(float(n), -sigma);
         float angle = -t * log(float(n));
-        sum += term * tan(angle); // Tangent part
+        sum += term * cos(angle); // Use cosine to avoid tangent's poles
     }
     return sum;
 }
 
 // Compute the zeta function using the functional equation
 float functionalZeta(float sigma, float t) {
+    // Check if sigma is close to 1 to handle the pole at s = 1
+    if (abs(sigma - 1.0) < 0.01) {
+        return 100.0; // Arbitrary large value to represent the pole
+    }
+
     // Compute zeta(sigma, t)
     float zeta_s = zeta(sigma, t);
     
@@ -41,7 +46,7 @@ float functionalZeta(float sigma, float t) {
 }
 
 void main() {
-    float scale = 100.0;
+    float scale = 50.0;
     float half_scale = scale * 0.5;
 
     // Map mouse position to coefficients
@@ -62,9 +67,12 @@ void main() {
     // Compute the zeta function value using the functional equation
     float zetaValue = functionalZeta(transformedSigma, transformedT);
 
-    // Normalize zetaValue to map to color range
+    // Normalize zetaValue to map to color range, clamping to avoid extreme values
+    // float normalizedZeta = clamp(zetaValue, -100.0, 100.0);
+
+    // Create gradients for visualization
     vec3 gradient1 = mix(color1, color2, zetaValue);
-    vec3 gradient2 = mix(color3, gradient1, zetaValue);
+    vec3 gradient2 = mix(color3, gradient1, 0.5 + 0.5 * sin(zetaValue));
 
     gl_FragColor = vec4(gradient2, 1.0);
 }
