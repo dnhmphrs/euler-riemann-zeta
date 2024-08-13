@@ -29,6 +29,10 @@
 	{/each}
 
 	<p>//</p>
+
+	<p style="opacity:1;font-weight: 700;">NOTE:: REAL PLANE IS TOP HALF</p>
+
+	<p>//</p>
 	<p>RENDERER::</p>
 		<p on:click={() => changeRenerer('three')} on:keypress={(null)} class="clickable" class:active={$renderer === 'three'}>THREE.JS (610kb)</p>
 		<!-- <p on:click={() => changeRenerer('regl')} on:keypress={(null)} class="clickable" class:active={$renderer === 'regl'}>REGL.JS (122kb)</p>
