@@ -30,7 +30,7 @@
 
 	<p>//</p>
 
-	<p style="opacity:1;font-weight: 700;">NOTE:: REAL PLANE IS TOP HALF</p>
+	<p style="opacity:1;font-weight: 700;">NOTE:: POSITIVE REAL PLANE IS TOP HALF</p>
 
 	<p>//</p>
 	<p>RENDERER::</p>
