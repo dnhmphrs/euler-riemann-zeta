@@ -29,19 +29,19 @@
 			href: '/'
 		},
 		{
-			name: 'Tangent - Proj',
+			name: 'Tangent - Mobius',
 			href: '/projective'
 		},
 		{
-			name: 'Functional Equation - Tangent - Proj',
+			name: 'Functional Equation - Tangent - Mobius',
 			href: '/functional'
 		},
 		{
-			name: 'Real Part  - Proj',
+			name: 'Real Part  - Mobius',
 			href: '/real'
 		},
 		{
-			name: 'Imangiary Part  - Proj',
+			name: 'Imangiary Part  - Mobius',
 			href: '/imaginary'
 		},	
 	];
