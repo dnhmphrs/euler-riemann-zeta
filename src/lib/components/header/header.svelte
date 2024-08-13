@@ -32,10 +32,10 @@
 			name: 'Tangent - Projective',
 			href: '/projective'
 		},
-		// {
-		// 	name: 'Tangent - Adapted',
-		// 	href: '/adapted'
-		// },
+		{
+			name: 'Functional Equation - Tangent - Projective',
+			href: '/functional'
+		},
 		{
 			name: 'Real Part  - Projective',
 			href: '/real'

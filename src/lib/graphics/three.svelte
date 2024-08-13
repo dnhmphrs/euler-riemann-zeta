@@ -9,14 +9,14 @@
 
 	import vertexShader from './shaders/vertexShader-three.glsl';
 	import fragmentShader_euler_riemann_zeta from './shaders/eulerRiemannZetaFrag.glsl';
-	import fragmentShader_euler_riemann_zeta_adapted from './shaders/eulerRiemannZetaFrag-adapted.glsl';
+	import fragmentShader_euler_riemann_zeta_functional from './shaders/eulerRiemannZetaFrag-functional.glsl';
 	import fragmentShader_euler_riemann_zeta_real from './shaders/eulerRiemannZetaRealFrag.glsl';
 	import fragmentShader_euler_riemann_zeta_imaginary from './shaders/eulerRiemannZetaImaginaryFrag.glsl';
 	import fragmentShader_euler_riemann_zeta_projective from './shaders/eulerRiemannZetaFrag-projective.glsl';
 
 
 
-	let shaderMaterial_euler_riemann_zeta, shaderMaterial_euler_riemann_zeta_adapted, shaderMaterial_euler_riemann_zeta_real, shaderMaterial_euler_riemann_zeta_imaginary, shaderMaterial_euler_riemann_zeta_projective;
+	let shaderMaterial_euler_riemann_zeta, shaderMaterial_euler_riemann_zeta_functional, shaderMaterial_euler_riemann_zeta_real, shaderMaterial_euler_riemann_zeta_imaginary, shaderMaterial_euler_riemann_zeta_projective;
 
 	let container;
 	let stats;
@@ -67,9 +67,9 @@
 			}
 		});
 
-		shaderMaterial_euler_riemann_zeta_adapted = new THREE.ShaderMaterial({
+		shaderMaterial_euler_riemann_zeta_functional = new THREE.ShaderMaterial({
 			vertexShader: vertexShader,
-			fragmentShader: fragmentShader_euler_riemann_zeta_adapted,
+			fragmentShader: fragmentShader_euler_riemann_zeta_functional,
 			uniforms: {
 				...uniformsBase,
 				color1: { value: colors.color1 },
@@ -190,10 +190,10 @@
 		// }
 	}
 
-	function setEulerRiemannZetaAdapted() {
+	function setEulerRiemannZetaFunctional() {
 
-		let plane4 = new THREE.Mesh(new THREE.PlaneGeometry(1000, 1000), shaderMaterial_euler_riemann_zeta_adapted);
-		// let plane5 = new THREE.Mesh(new THREE.PlaneGeometry(100, 100), shaderMaterial_euler_riemann_zeta_adapted);
+		let plane4 = new THREE.Mesh(new THREE.PlaneGeometry(1000, 1000), shaderMaterial_euler_riemann_zeta_functional);
+		// let plane5 = new THREE.Mesh(new THREE.PlaneGeometry(100, 100), shaderMaterial_euler_riemann_zeta_functional);
 		scene.add(plane4);
 
 		// if ($screenType != 1) {
@@ -265,8 +265,8 @@
 			setHome();
 		}
 
-		if ($page.url.pathname == '/adapted') {
-			setEulerRiemannZetaAdapted();
+		if ($page.url.pathname == '/functional') {
+			setEulerRiemannZetaFunctional();
 		}
 
 		if ($page.url.pathname == '/projective') {
