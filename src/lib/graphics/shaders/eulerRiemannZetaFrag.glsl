@@ -37,12 +37,16 @@ const float LINE_NEG_F = -initial1 - 5.0 * gap1; // The real part of s at 0
 // Function to compute the Euler–Riemann zeta function
 float zeta(float sigma, float t) {
     float sum = 0.0;
-    const int N = 100; // Number of terms in the series for approximation
+    const int N = 25; // Number of terms in the series for approximation
 
     for (int n = 1; n <= N; ++n) {
         float term = pow(float(n), -sigma);
         float angle = -t * log(float(n));
-        sum += term * tan(angle); // Tangent part
+        // sum += term * tan(angle); // Tangent part
+        float tangentValue = tan(angle);
+        if (abs(tangentValue) <100.0) {
+            sum += term * tangentValue;
+        }
     }
 
     return sum;

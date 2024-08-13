@@ -7,7 +7,7 @@ uniform vec2 mouse;
 
 float zeta(float sigma, float t) {
     float sum = 0.0;
-    const int N = 100; // Number of terms in the series for approximation
+    const int N = 25; // Number of terms in the series for approximation
     for (int n = 1; n <= N; ++n) {
         float term = pow(float(n), -sigma);
         float angle = -t * log(float(n));
