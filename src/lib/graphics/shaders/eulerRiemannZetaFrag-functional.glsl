@@ -54,21 +54,17 @@ void main() {
     float sigma = vUv.y * scale - half_scale; // Real part of s (horizontal axis)
     float t = vUv.x * scale - half_scale;     // Imaginary part of s (vertical axis)
 
-    // Apply Möbius transformation
-    float denominator = (c * sigma + d) * (c * sigma + d) + (c * t) * (c * t);
-    float transformedSigma = (a * sigma + b) / denominator;
-    float transformedT = (a * t + b) / denominator;
+    // Combine sigma and t into a complex number and apply the Möbius transformation
+    float denom = c * c * (sigma * sigma + t * t) + 2.0 * c * d * sigma + d * d;
+    float transformedSigma = (a * c * (sigma * sigma + t * t) + a * d * sigma + b * c * sigma + b * d) / denom;
+    float transformedT = (a * c * 2.0 * sigma * t + a * d * t + b * c * t) / denom;
 
     // Compute the zeta function value using the functional equation
     float zetaValue = functionalZeta(transformedSigma, transformedT);
 
     // Normalize zetaValue to map to color range
-    // float normalizedZeta = zetaValue; // Adjust scaling factor for better contrast
-
-    // Create gradients for visualization
     vec3 gradient1 = mix(color1, color2, zetaValue);
-    // vec3 gradient2 = mix(color3, gradient1, 0.5 + 0.5 * sin(normalizedZeta * 3.14159));
-    vec3 gradient2 = mix(color3, gradient1, 0.5 + 0.5 * zetaValue);
+    vec3 gradient2 = mix(color3, gradient1, zetaValue);
 
     gl_FragColor = vec4(gradient2, 1.0);
 }

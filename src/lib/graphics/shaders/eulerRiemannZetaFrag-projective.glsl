@@ -32,9 +32,9 @@ void main() {
     float t = vUv.x * scale - half_scale;     // Imaginary part of s (vertical axis)
 
     // Apply Möbius transformation
-    float denominator = (c * sigma + d) * (c * sigma + d) + (c * t) * (c * t);
-    float transformedSigma = (a * sigma + b) / denominator;
-    float transformedT = (a * t + b) / denominator;
+    float denom = c * c * (sigma * sigma + t * t) + 2.0 * c * d * sigma + d * d;
+    float transformedSigma = (a * c * (sigma * sigma + t * t) + a * d * sigma + b * c * sigma + b * d) / denom;
+    float transformedT = (a * c * 2.0 * sigma * t + a * d * t + b * c * t) / denom;
 
     // Compute the zeta function value
     float zetaValue = zeta(transformedSigma, transformedT);
