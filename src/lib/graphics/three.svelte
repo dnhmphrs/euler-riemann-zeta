@@ -273,11 +273,11 @@
 			setEulerRiemannZetaProjective();
 		}
 
-		if ($page.url.pathname == '/euler-riemann-zeta-real') {
+		if ($page.url.pathname == '/real') {
 			setEulerRiemannZetaReal();
 		}
 
-		if ($page.url.pathname == '/euler-riemann-zeta-imaginary') {
+		if ($page.url.pathname == '/imaginary') {
 			setEulerRiemannZetaImaginary();
 		}
 	}

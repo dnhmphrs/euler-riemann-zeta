@@ -60,11 +60,11 @@ void main() {
     float zetaValue = zeta(sigma, t);
 
     // Normalize zetaValue to map to color range
-    float normalizedZeta = 0.5 + 0.1 * zetaValue; // Adjust scaling factor for better contrast
+    // float normalizedZeta = 0.5 + 0.1 * zetaValue; // Adjust scaling factor for better contrast
 
     // Create gradients for visualization
-    vec3 gradient1 = mix(color1, color2, normalizedZeta);
-    vec3 gradient2 = mix(color3, gradient1, 0.5 + 0.5 * sin(normalizedZeta * 3.14159));
+    vec3 gradient1 = mix(color1, color2, zetaValue);
+    vec3 gradient2 = mix(color3, gradient1, 0.5 + 0.5 * sin(zetaValue * 3.14159));
 
     // Draw the critical strip
     float lineThickness = 0.0002; // Thickness of the line

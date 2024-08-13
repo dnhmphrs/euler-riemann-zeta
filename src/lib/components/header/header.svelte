@@ -32,17 +32,17 @@
 			name: 'Tangent - Projective',
 			href: '/projective'
 		},
+		// {
+		// 	name: 'Tangent - Adapted',
+		// 	href: '/adapted'
+		// },
 		{
-			name: 'Tangent - Adapted',
-			href: '/adapted'
+			name: 'Real Part  - Projective',
+			href: '/real'
 		},
 		{
-			name: 'Euler-Riemann Zeta - Real Part',
-			href: '/euler-riemann-zeta-real'
-		},
-		{
-			name: 'Euler-Riemann Zeta - Imangiary Part',
-			href: '/euler-riemann-zeta-imaginary'
+			name: 'Imangiary Part  - Projective',
+			href: '/imaginary'
 		},	
 	];
 
