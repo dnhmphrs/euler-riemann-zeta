@@ -9,11 +9,8 @@ const float CRITICAL_LINE = 0.5; // The real part of s on the critical line
 const float ZERO_LINE = 0.0; // The real part of s at 0
 const float ONE_LINE = 1.0; // The real part of s at 1
 
-// const float initial1 = 3.14159 * 0.5;
-// const float gap1 = initial1 * 2.0;
-
 const float initial1 = 2.26658;
-const float gap1 = initial1 * 2.0;
+const float gap1 = 4.53316;
 
 const float LINE_A = initial1; // The real part of s at 0
 const float LINE_NEG_A = -initial1; // The real part of s at 0

@@ -29,7 +29,11 @@
 			href: '/'
 		},
 		{
-			name: 'Euler-Riemann Zeta - Tangent (adapted)',
+			name: 'Tangent - Projective',
+			href: '/projective'
+		},
+		{
+			name: 'Tangent - Adapted',
 			href: '/adapted'
 		},
 		{

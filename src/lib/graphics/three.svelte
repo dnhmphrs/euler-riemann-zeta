@@ -12,11 +12,11 @@
 	import fragmentShader_euler_riemann_zeta_adapted from './shaders/eulerRiemannZetaFrag-adapted.glsl';
 	import fragmentShader_euler_riemann_zeta_real from './shaders/eulerRiemannZetaRealFrag.glsl';
 	import fragmentShader_euler_riemann_zeta_imaginary from './shaders/eulerRiemannZetaImaginaryFrag.glsl';
-	// import fragmentShader_kp from './shaders/kpEquationFrag.glsl';
+	import fragmentShader_euler_riemann_zeta_projective from './shaders/eulerRiemannZetaFrag-projective.glsl';
 
 
 
-	let shaderMaterial_euler_riemann_zeta, shaderMaterial_euler_riemann_zeta_adapted, shaderMaterial_euler_riemann_zeta_real, shaderMaterial_euler_riemann_zeta_imaginary;
+	let shaderMaterial_euler_riemann_zeta, shaderMaterial_euler_riemann_zeta_adapted, shaderMaterial_euler_riemann_zeta_real, shaderMaterial_euler_riemann_zeta_imaginary, shaderMaterial_euler_riemann_zeta_projective;
 
 	let container;
 	let stats;
@@ -92,6 +92,17 @@
 		shaderMaterial_euler_riemann_zeta_imaginary = new THREE.ShaderMaterial({
 			vertexShader: vertexShader,
 			fragmentShader: fragmentShader_euler_riemann_zeta_imaginary,
+			uniforms: {
+				...uniformsBase,
+				color1: { value: colors.color1 },
+				color2: { value: colors.color5 },
+				color3: { value: colors.color9 },
+			}
+		});
+
+		shaderMaterial_euler_riemann_zeta_projective = new THREE.ShaderMaterial({
+			vertexShader: vertexShader,
+			fragmentShader: fragmentShader_euler_riemann_zeta_projective,
 			uniforms: {
 				...uniformsBase,
 				color1: { value: colors.color1 },
@@ -231,6 +242,23 @@
 		// }
 	}
 
+	function setEulerRiemannZetaProjective() {
+
+		let plane4 = new THREE.Mesh(new THREE.PlaneGeometry(1000, 1000), shaderMaterial_euler_riemann_zeta_projective);
+		// let plane5 = new THREE.Mesh(new THREE.PlaneGeometry(100, 100), shaderMaterial_euler_riemann_zeta_imaginary);
+		scene.add(plane4);
+
+		// if ($screenType != 1) {
+		// 	plane5.position.z = 200;
+		// 	scene.add(plane5);
+
+		// } else {
+		// 	plane5.position.z = 100;
+		// 	plane5.rotation.z = Math.PI / 2
+		// 	scene.add(plane5);
+		// }
+	}
+
 	function setScene () {
 
 		if ($page.url.pathname == '/') {
@@ -239,6 +267,10 @@
 
 		if ($page.url.pathname == '/adapted') {
 			setEulerRiemannZetaAdapted();
+		}
+
+		if ($page.url.pathname == '/projective') {
+			setEulerRiemannZetaProjective();
 		}
 
 		if ($page.url.pathname == '/euler-riemann-zeta-real') {
