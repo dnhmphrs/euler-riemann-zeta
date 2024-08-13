@@ -305,15 +305,16 @@
 	}
 
 	function onDocumentMouseMove(event) {
+
+		var clientX = event.clientX;
+		var clientY = event.clientY;
+
+		mouse.x = (clientX / window.innerWidth) * 2 - 1;
+		mouse.y = -(clientY / window.innerHeight) * 2 + 1;
+
 		if ($mouseOverHeader) {
 			mouse.x = 0;
 			mouse.y = 0;
-		} else {
-			var clientX = event.clientX;
-			var clientY = event.clientY;
-
-			mouse.x = (clientX / window.innerWidth) * 2 - 1;
-			mouse.y = -(clientY / window.innerHeight) * 2 + 1;
 		}
 		
 		// update store
