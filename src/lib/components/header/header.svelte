@@ -26,6 +26,10 @@
 			href: '/'
 		},
 		{
+			name: 'Real Part - Simple',
+			href: '/simple'
+		},
+		{
 			name: 'Tangent - Mobius',
 			href: '/projective'
 		},

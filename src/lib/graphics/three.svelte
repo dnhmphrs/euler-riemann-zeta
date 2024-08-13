@@ -9,6 +9,7 @@
 
 	import vertexShader from './shaders/vertexShader-three.glsl';
 	import fragmentShader_euler_riemann_zeta from './shaders/eulerRiemannZetaFrag.glsl';
+	import fragmentShader_euler_riemann_zeta_simple from './shaders/eulerRiemannZetaFrag-simple.glsl';
 	import fragmentShader_euler_riemann_zeta_functional from './shaders/eulerRiemannZetaFrag-functional.glsl';
 	import fragmentShader_euler_riemann_zeta_real from './shaders/eulerRiemannZetaFrag-real.glsl';
 	import fragmentShader_euler_riemann_zeta_imaginary from './shaders/eulerRiemannZetaFrag-imaginary.glsl';
@@ -16,7 +17,7 @@
 
 
 
-	let shaderMaterial_euler_riemann_zeta, shaderMaterial_euler_riemann_zeta_functional, shaderMaterial_euler_riemann_zeta_real, shaderMaterial_euler_riemann_zeta_imaginary, shaderMaterial_euler_riemann_zeta_projective;
+	let shaderMaterial_euler_riemann_zeta, shaderMaterial_euler_riemann_zeta_simple, shaderMaterial_euler_riemann_zeta_functional, shaderMaterial_euler_riemann_zeta_real, shaderMaterial_euler_riemann_zeta_imaginary, shaderMaterial_euler_riemann_zeta_projective;
 
 	let container;
 	let stats;
@@ -59,6 +60,17 @@
 		shaderMaterial_euler_riemann_zeta = new THREE.ShaderMaterial({
 			vertexShader: vertexShader,
 			fragmentShader: fragmentShader_euler_riemann_zeta,
+			uniforms: {
+				...uniformsBase,
+				color1: { value: colors.color1 },
+				color2: { value: colors.color5 },
+				color3: { value: colors.color9 },
+			}
+		});
+
+		shaderMaterial_euler_riemann_zeta_simple = new THREE.ShaderMaterial({
+			vertexShader: vertexShader,
+			fragmentShader: fragmentShader_euler_riemann_zeta_simple,
 			uniforms: {
 				...uniformsBase,
 				color1: { value: colors.color1 },
@@ -190,6 +202,23 @@
 		// }
 	}
 
+	function setEulerRiemannZetaSimple() {
+
+		let plane4 = new THREE.Mesh(new THREE.PlaneGeometry(1000, 1000), shaderMaterial_euler_riemann_zeta_simple);
+		// let plane5 = new THREE.Mesh(new THREE.PlaneGeometry(100, 100), shaderMaterial_euler_riemann_zeta_simple);
+		scene.add(plane4);
+
+		// if ($screenType != 1) {
+		// 	plane5.position.z = 200;
+		// 	scene.add(plane5);
+
+		// } else {
+		// 	plane5.position.z = 100;
+		// 	plane5.rotation.z = Math.PI / 2
+		// 	scene.add(plane5);
+		// }
+	}
+
 	function setEulerRiemannZetaFunctional() {
 
 		let plane4 = new THREE.Mesh(new THREE.PlaneGeometry(1000, 1000), shaderMaterial_euler_riemann_zeta_functional);
@@ -263,6 +292,10 @@
 
 		if ($page.url.pathname == '/') {
 			setHome();
+		}
+
+		if ($page.url.pathname == '/simple') {
+			setEulerRiemannZetaSimple();
 		}
 
 		if ($page.url.pathname == '/functional') {
