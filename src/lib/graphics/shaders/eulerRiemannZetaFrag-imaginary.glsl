@@ -22,10 +22,10 @@ void main() {
     float half_scale = scale * 0.5;
 
     // Map mouse position to coefficients
-    float a = 1.0 + mouse.x * 0.5;  // Controls scaling
-    float b = mouse.y * 2.0;        // Controls translation
-    float c = mouse.x * 2.0;        // Controls skewing
-    float d = 1.0 - mouse.y * 0.5;  // Controls scaling and rotation
+    float a = 1.0 + mouse.y * 0.5;  // Controls scaling
+    float b = mouse.x * 2.0;        // Controls translation
+    float c = mouse.y * 2.0;        // Controls skewing
+    float d = 1.0 - mouse.x * 0.5;  // Controls scaling and rotation
 
     // Map the fragment coordinates to the complex plane
     float sigma = vUv.y * scale - half_scale; // Real part of s (horizontal axis)
