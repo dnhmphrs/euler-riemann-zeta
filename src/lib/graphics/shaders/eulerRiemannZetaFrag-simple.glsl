@@ -43,7 +43,7 @@ float zeta(float sigma, float t) {
         float term = pow(float(n), -sigma);
         float angle = -t * log(float(n));
         // sum += term * tan(angle); // Tangent part
-        float tangentValue = sin(angle);
+        float tangentValue = cos(angle);
         if (abs(tangentValue) <100.0) {
             sum += term * tangentValue;
         }
