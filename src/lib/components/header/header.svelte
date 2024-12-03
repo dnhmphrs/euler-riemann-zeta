@@ -30,11 +30,11 @@
 			href: '/simple'
 		},
 		{
-			name: 'Tangent - Mobius',
+			name: 'Tangent ',
 			href: '/projective'
 		},
 		{
-			name: 'Functional Equation - Real Part - Mobius',
+			name: 'Functional Equation - Real Part',
 			href: '/functional'
 		},
 		{

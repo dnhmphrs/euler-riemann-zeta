@@ -34,10 +34,22 @@ const float LINE_NEG_F = -initial1 - 5.0 * gap1; // The real part of s at 0
 // const float LINE_NEG_B1 = -initial2 - gap2; // The real part of s at 0
 
 
+// zeta zeros 
+const float ZETA_ZERO_1 = 14.1347;
+const float ZETA_ZERO_2 = 21.0220;
+const float ZETA_ZERO_3 = 25.0109;
+const float ZETA_ZERO_4 = 30.4249;
+const float ZETA_ZERO_5 = 32.9351;
+const float ZETA_ZERO_6 = 37.5862;
+const float ZETA_ZERO_7 = 40.9187;
+const float ZETA_ZERO_8 = 43.3271;
+const float ZETA_ZERO_9 = 48.0052;
+const float ZETA_ZERO_10 = 49.7738;
+
 // Function to compute the Euler–Riemann zeta function
 float zeta(float sigma, float t) {
     float sum = 0.0;
-    const int N = 25; // Number of terms in the series for approximation
+    const int N = 2; // Number of terms in the series for approximation
 
     for (int n = 1; n <= N; ++n) {
         float term = pow(float(n), -sigma);
@@ -54,7 +66,7 @@ float zeta(float sigma, float t) {
 
 
 void main() {
-    float scale = 100.0;
+    float scale = 200.0;
     float half_scale = scale * 0.5;
     // Map the fragment coordinates to the complex plane
     float sigma = vUv.y * scale - half_scale; // Real part of s (horizontal axis)
@@ -158,6 +170,62 @@ void main() {
     if (abs(vUv.x - lineNegFPosition) < lineThickness) {
         gradient2 = mix(color3, vec3(0.0, 0.0, 0.0), 0.7);
     }
+
+    // zetazeros
+    float zetaZero1Pos = (ZETA_ZERO_1 + half_scale) / scale;
+    float zetaZero2Pos = (ZETA_ZERO_2 + half_scale) / scale;
+    float zetaZero3Pos = (ZETA_ZERO_3 + half_scale) / scale;
+    float zetaZero4Pos = (ZETA_ZERO_4 + half_scale) / scale;
+    float zetaZero5Pos = (ZETA_ZERO_5 + half_scale) / scale;
+    float zetaZero6Pos = (ZETA_ZERO_6 + half_scale) / scale;
+    float zetaZero7Pos = (ZETA_ZERO_7 + half_scale) / scale;
+    float zetaZero8Pos = (ZETA_ZERO_8 + half_scale) / scale;
+    float zetaZero9Pos = (ZETA_ZERO_9 + half_scale) / scale;
+    float zetaZero10Pos = (ZETA_ZERO_10 + half_scale) / scale;
+
+    float zetaZero1Neg = (-ZETA_ZERO_1 + half_scale) / scale;
+    float zetaZero2Neg = (-ZETA_ZERO_2 + half_scale) / scale;
+    float zetaZero3Neg = (-ZETA_ZERO_3 + half_scale) / scale;
+    float zetaZero4Neg = (-ZETA_ZERO_4 + half_scale) / scale;
+    float zetaZero5Neg = (-ZETA_ZERO_5 + half_scale) / scale;
+    float zetaZero6Neg = (-ZETA_ZERO_6 + half_scale) / scale;
+    float zetaZero7Neg = (-ZETA_ZERO_7 + half_scale) / scale;
+    float zetaZero8Neg = (-ZETA_ZERO_8 + half_scale) / scale;
+    float zetaZero9Neg = (-ZETA_ZERO_9 + half_scale) / scale;
+    float zetaZero10Neg = (-ZETA_ZERO_10 + half_scale) / scale;
+
+    if (abs(vUv.x - zetaZero1Pos) < lineThickness || abs(vUv.x - zetaZero1Neg) < lineThickness) {
+        gradient2 = mix(color3, vec3(1.0, 0.0, 0.0), 0.7); // Red line for zero
+    }
+    if (abs(vUv.x - zetaZero2Pos) < lineThickness || abs(vUv.x - zetaZero2Neg) < lineThickness) {
+        gradient2 = mix(color3, vec3(1.0, 0.0, 0.0), 0.7);
+    }
+    if (abs(vUv.x - zetaZero3Pos) < lineThickness || abs(vUv.x - zetaZero3Neg) < lineThickness) {
+        gradient2 = mix(color3, vec3(1.0, 0.0, 0.0), 0.7);
+    }
+    if (abs(vUv.x - zetaZero4Pos) < lineThickness || abs(vUv.x - zetaZero4Neg) < lineThickness) {
+        gradient2 = mix(color3, vec3(1.0, 0.0, 0.0), 0.7);
+    }
+    if (abs(vUv.x - zetaZero5Pos) < lineThickness || abs(vUv.x - zetaZero5Neg) < lineThickness) {
+        gradient2 = mix(color3, vec3(1.0, 0.0, 0.0), 0.7);
+    }
+    if (abs(vUv.x - zetaZero6Pos) < lineThickness || abs(vUv.x - zetaZero6Neg) < lineThickness) {
+        gradient2 = mix(color3, vec3(1.0, 0.0, 0.0), 0.7);
+    }
+    if (abs(vUv.x - zetaZero7Pos) < lineThickness || abs(vUv.x - zetaZero7Neg) < lineThickness) {
+        gradient2 = mix(color3, vec3(1.0, 0.0, 0.0), 0.7);
+    }
+    if (abs(vUv.x - zetaZero8Pos) < lineThickness || abs(vUv.x - zetaZero8Neg) < lineThickness) {
+        gradient2 = mix(color3, vec3(1.0, 0.0, 0.0), 0.7);
+    }
+    if (abs(vUv.x - zetaZero9Pos) < lineThickness || abs(vUv.x - zetaZero9Neg) < lineThickness) {
+        gradient2 = mix(color3, vec3(1.0, 0.0, 0.0), 0.7);
+    }
+    if (abs(vUv.x - zetaZero10Pos) < lineThickness || abs(vUv.x - zetaZero10Neg) < lineThickness) {
+        gradient2 = mix(color3, vec3(1.0, 0.0, 0.0), 0.7);
+    }
+
+
 
     // Highlight the vertical lines - 2
 

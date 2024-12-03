@@ -13,7 +13,7 @@ float gamma(float s) {
 // Compute the zeta function using a simple series expansion
 float zeta(float sigma, float t) {
     float sum = 0.0;
-    const int N = 15; // Number of terms in the series for approximation
+    const int N = 25; // Number of terms in the series for approximation
     for (int n = 1; n <= N; ++n) {
         float term = pow(float(n), -sigma);
         float angle = -t * log(float(n));
@@ -59,13 +59,15 @@ void main() {
     float sigma = vUv.y * scale - half_scale; // Real part of s (horizontal axis)
     float t = vUv.x * scale - half_scale;     // Imaginary part of s (vertical axis)
 
-    // Combine sigma and t into a complex number and apply the Möbius transformation
-    float denom = c * c * (sigma * sigma + t * t) + 2.0 * c * d * sigma + d * d;
-    float transformedSigma = (a * c * (sigma * sigma + t * t) + a * d * sigma + b * c * sigma + b * d) / denom;
-    float transformedT = (a * c * 2.0 * sigma * t + a * d * t + b * c * t) / denom;
+    // // Combine sigma and t into a complex number and apply the Möbius transformation
+    // float denom = c * c * (sigma * sigma + t * t) + 2.0 * c * d * sigma + d * d;
+    // float transformedSigma = (a * c * (sigma * sigma + t * t) + a * d * sigma + b * c * sigma + b * d) / denom;
+    // float transformedT = (a * c * 2.0 * sigma * t + a * d * t + b * c * t) / denom;
 
-    // Compute the zeta function value using the functional equation
-    float zetaValue = functionalZeta(transformedSigma, transformedT);
+    // // Compute the zeta function value using the functional equation
+    // float zetaValue = functionalZeta(transformedSigma, transformedT);
+
+    float zetaValue = functionalZeta(sigma, t);
 
     // Normalize zetaValue to map to color range, clamping to avoid extreme values
     // float normalizedZeta = clamp(zetaValue, -100.0, 100.0);

@@ -31,13 +31,15 @@ void main() {
     float sigma = vUv.y * scale - half_scale; // Real part of s (horizontal axis)
     float t = vUv.x * scale - half_scale;     // Imaginary part of s (vertical axis)
 
-    // Apply Möbius transformation
-    float denom = c * c * (sigma * sigma + t * t) + 2.0 * c * d * sigma + d * d;
-    float transformedSigma = (a * c * (sigma * sigma + t * t) + a * d * sigma + b * c * sigma + b * d) / denom;
-    float transformedT = (a * c * 2.0 * sigma * t + a * d * t + b * c * t) / denom;
+    // // Apply Möbius transformation
+    // float denom = c * c * (sigma * sigma + t * t) + 2.0 * c * d * sigma + d * d;
+    // float transformedSigma = (a * c * (sigma * sigma + t * t) + a * d * sigma + b * c * sigma + b * d) / denom;
+    // float transformedT = (a * c * 2.0 * sigma * t + a * d * t + b * c * t) / denom;
 
-    // Compute the zeta function value
-    float zetaValue = zeta(transformedSigma, transformedT);
+    // // Compute the zeta function value
+    // float zetaValue = zeta(transformedSigma, transformedT);
+
+    float zetaValue = zeta(sigma, t);
 
     // Normalize zetaValue to map to color range
     float normalizedZeta = zetaValue; // Adjust scaling factor for better contrast
