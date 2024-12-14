@@ -133,7 +133,7 @@ float symmetricZeta(float sigma, float t) {
 
 
 void main() {
-    float scale = 200.0;
+    float scale = 50.0;
     float half_scale = scale * 0.5;
 
     // Map mouse position to coefficients
