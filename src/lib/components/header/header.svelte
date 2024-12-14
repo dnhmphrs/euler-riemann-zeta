@@ -34,7 +34,7 @@
 			href: '/projective'
 		},
 		{
-			name: 'Functional Equation - Real Part',
+			name: 'Functional Equation',
 			href: '/functional'
 		},
 		{
@@ -44,6 +44,10 @@
 		{
 			name: 'Imangiary Part  - Mobius',
 			href: '/imaginary'
+		},
+		{
+			name: 'Xi - Functional',
+			href: '/xi'
 		}
 	];
 

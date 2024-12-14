@@ -14,10 +14,10 @@
 	import fragmentShader_euler_riemann_zeta_real from './shaders/eulerRiemannZetaFrag-real.glsl';
 	import fragmentShader_euler_riemann_zeta_imaginary from './shaders/eulerRiemannZetaFrag-imaginary.glsl';
 	import fragmentShader_euler_riemann_zeta_projective from './shaders/eulerRiemannZetaFrag-projective.glsl';
+	import fragmentShader_xi from './shaders/xiFrag.glsl';
 
 
-
-	let shaderMaterial_euler_riemann_zeta, shaderMaterial_euler_riemann_zeta_simple, shaderMaterial_euler_riemann_zeta_functional, shaderMaterial_euler_riemann_zeta_real, shaderMaterial_euler_riemann_zeta_imaginary, shaderMaterial_euler_riemann_zeta_projective;
+	let shaderMaterial_euler_riemann_zeta, shaderMaterial_euler_riemann_zeta_simple, shaderMaterial_euler_riemann_zeta_functional, shaderMaterial_euler_riemann_zeta_real, shaderMaterial_euler_riemann_zeta_imaginary, shaderMaterial_euler_riemann_zeta_projective, shaderMaterial_xi;
 
 	let container;
 	let stats;
@@ -122,7 +122,20 @@
 				color3: { value: colors.color9 },
 			}
 		});
+		
+		shaderMaterial_xi = new THREE.ShaderMaterial({
+		vertexShader: vertexShader,
+		fragmentShader: fragmentShader_xi,
+		uniforms: {
+			...uniformsBase,
+			color1: { value: colors.color1 },
+			color2: { value: colors.color5 },
+			color3: { value: colors.color9 },
+		}
+	});
 	}
+
+
 
 	function updateShaderUniforms() {
 		// const elapsedTime = clock.getElapsedTime();
@@ -288,6 +301,23 @@
 		// }
 	}
 
+	function setXi() {
+
+		let plane4 = new THREE.Mesh(new THREE.PlaneGeometry(1000, 1000), shaderMaterial_xi);
+		// let plane5 = new THREE.Mesh(new THREE.PlaneGeometry(100, 100), shaderMaterial_euler_riemann_zeta_imaginary);
+		scene.add(plane4);
+
+		// if ($screenType != 1) {
+		// 	plane5.position.z = 200;
+		// 	scene.add(plane5);
+
+		// } else {
+		// 	plane5.position.z = 100;
+		// 	plane5.rotation.z = Math.PI / 2
+		// 	scene.add(plane5);
+		// }
+	}
+
 	function setScene () {
 
 		if ($page.url.pathname == '/') {
@@ -312,6 +342,10 @@
 
 		if ($page.url.pathname == '/imaginary') {
 			setEulerRiemannZetaImaginary();
+		}
+
+		if ($page.url.pathname == '/xi') {
+			setXi();
 		}
 	}
 
