@@ -49,7 +49,7 @@ const float ZETA_ZERO_10 = 49.7738;
 // Function to compute the Euler–Riemann zeta function
 float zeta(float sigma, float t) {
     float sum = 0.0;
-    const int N = 2; // Number of terms in the series for approximation
+    const int N = 100; // Number of terms in the series for approximation
 
     for (int n = 1; n <= N; ++n) {
         float term = pow(float(n), -sigma);
@@ -66,7 +66,7 @@ float zeta(float sigma, float t) {
 
 
 void main() {
-    float scale = 200.0;
+    float scale = 100.0;
     float half_scale = scale * 0.5;
     // Map the fragment coordinates to the complex plane
     float sigma = vUv.y * scale - half_scale; // Real part of s (horizontal axis)

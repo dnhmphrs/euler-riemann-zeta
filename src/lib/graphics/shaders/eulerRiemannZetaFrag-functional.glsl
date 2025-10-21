@@ -57,18 +57,20 @@ Complex zetaTerm(float n, float sigma, float t) {
     float log_n = log(n);
     float magnitude = pow(n, -sigma); // exp(-sigma * log(n))
     float angle = -t * log_n;        // -t * log(n)
-    return Complex(magnitude * tan(angle), magnitude * tan(angle));
+    return Complex(magnitude * cos(angle), magnitude * sin(angle));
 }
 
 // Approximate the Riemann zeta function for Re(s) > 1
 Complex zeta(float sigma, float t) {
     Complex sum = Complex(0.0, 0.0);
-    const int N = 2; // Increase for better accuracy
+    const int N = 25; // Increase for better accuracy
     for (int n = 1; n <= N; ++n) {
         sum = add(sum, zetaTerm(float(n), sigma, t));
     }
     return sum;
 }
+
+
 
 // Functional equation for the Riemann zeta function
 float functionalZeta(float sigma, float t) {
@@ -102,38 +104,29 @@ float functionalZeta(float sigma, float t) {
     return sqrt(result.re * result.re + result.im * result.im);
 }
 
-// Functional equation for symmetric calculation
+
+// For visualization, compute based on which side of critical line
 float symmetricZeta(float sigma, float t) {
-    // Compute zeta(sigma, t) for Re(s) > 1
+    // Direct computation for Re(s) >= 0.5
     Complex zeta_s = zeta(sigma, t);
-
-    // Compute zeta(1 - sigma, -t) using the functional equation
+    float directMagnitude = sqrt(zeta_s.re * zeta_s.re + zeta_s.im * zeta_s.im);
+    
+    // Functional equation for Re(s) < 0.5
     Complex zeta_1_minus_s = zeta(1.0 - sigma, -t);
-
-    // Compute Gamma(1 - sigma) using Stirling's approximation
-    float gamma_value = gamma(1.0 - sigma);
-
-    // Compute the sine factor sin(pi * sigma / 2)
+    float gamma_val = gamma(1.0 - sigma);
     float sine_factor = sin(3.141592653589793 * sigma / 2.0);
-
-    // Compute the multiplier
-    float multiplier = pow(2.0, sigma) * pow(3.141592653589793, sigma - 1.0) * sine_factor * gamma_value;
-
-    // Apply the functional equation by scaling zeta_1_minus_s
-    zeta_1_minus_s = scale(zeta_1_minus_s, multiplier);
-
-    // Combine zeta(s) and zeta(1 - s) symmetrically
-    Complex result = add(zeta_s, zeta_1_minus_s);
-
-    // Return the magnitude of the result (|zeta(s)|)
-    return sqrt(result.re * result.re + result.im * result.im);
+    float multiplier = pow(2.0, sigma) * pow(3.141592653589793, sigma - 1.0) * sine_factor * gamma_val;
+    Complex reflected = scale(zeta_1_minus_s, multiplier);
+    float reflectedMagnitude = sqrt(reflected.re * reflected.re + reflected.im * reflected.im);
+    
+    // Smooth blend based on sigma
+    float blend = smoothstep(0.4, 0.6, sigma);
+    return mix(reflectedMagnitude, directMagnitude, blend);
 }
 
 
-
-
 void main() {
-    float scale = 50.0;
+    float scale = 120.0;
     float half_scale = scale * 0.5;
 
     // Map mouse position to coefficients
@@ -146,37 +139,7 @@ void main() {
     float sigma = vUv.y * scale - half_scale; // Real part of s (horizontal axis)
     float t = vUv.x * scale - half_scale;     // Imaginary part of s (vertical axis)
 
-    // // Combine sigma and t into a complex number and apply the Möbius transformation
-    // float denom = c * c * (sigma * sigma + t * t) + 2.0 * c * d * sigma + d * d;
-    // float transformedSigma = (a * c * (sigma * sigma + t * t) + a * d * sigma + b * c * sigma + b * d) / denom;
-    // float transformedT = (a * c * 2.0 * sigma * t + a * d * t + b * c * t) / denom;
-
-    // // Compute the zeta function value using the functional equation
-    // float zetaValue = functionalZeta(transformedSigma, transformedT);
-
-    // Compute zeta values for both sides of the critical line
-    float zetaValueNorth = functionalZeta(sigma, t);       // For Re(s) > 0.5
-    float zetaValueSouth = symmetricZeta(1.0 - sigma, t);  // For Re(s) < 0.5
-
-    // Blend values in the critical strip (0 < Re(s) < 1)
-    float blendFactor = clamp((0.5 - abs(0.5 - sigma)) * 10.0, 0.0, 1.0); // Smoothstep blend in the strip
-    float blendedZeta = mix(zetaValueNorth, zetaValueSouth, blendFactor);
-
-    // Determine the final zeta value for rendering
-    float zetaValue;
-    if (sigma < 0.5) {
-        zetaValue = zetaValueNorth; // Render zeta(s) above the critical strip
-    } else if (sigma > 0.5) {
-        zetaValue = zetaValueSouth; // Render zeta(1-s) below the critical strip
-    } else {
-        zetaValue = blendedZeta; // Blend in the critical strip
-    }
-    
-    // Normalize zetaValue to map to color range, clamping to avoid extreme values
-    // float normalizedZeta = log(1.0 + abs(zetaValue)); // Use logarithmic scaling
-
-    // Normalize zetaValue to map to color range, clamping to avoid extreme values
-    // float normalizedZeta = clamp(zetaValue, -100.0, 100.0);
+    float zetaValue = symmetricZeta(sigma, t);
 
     // Create gradients for visualization
     vec3 gradient1 = mix(color1, color2, zetaValue);
@@ -202,7 +165,6 @@ void main() {
     if (abs(vUv.y - oneLinePosition) < lineThickness) {
         gradient2 = mix(color3, vec3(0.0, 0.0, 0.0), 0.7); // Black line for one
     }
-
 
     // zetazeros
     float zetaZero1Pos = (ZETA_ZERO_1 + half_scale) / scale;
@@ -259,4 +221,6 @@ void main() {
     }
 
     gl_FragColor = vec4(gradient2, 1.0);
+
+    
 }
