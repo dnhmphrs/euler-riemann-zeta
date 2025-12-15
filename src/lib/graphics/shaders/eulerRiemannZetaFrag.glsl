@@ -34,7 +34,7 @@ void main() {
     float zetaValue = zeta(sigma, t, base, power);
 
     vec3 gradient1 = mix(color1, color2, zetaValue);
-    vec3 gradient2 = mix(color3, gradient1, 0.5 + 0.5 * sin(zetaValue * 3.14159));
+    vec3 gradient2 = mix(color3, gradient1, 0.5 + 0.5 * cos(zetaValue * 3.14159));
 
     gl_FragColor = vec4(gradient2, 1.0);
 }
