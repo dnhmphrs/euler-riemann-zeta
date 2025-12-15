@@ -7,7 +7,7 @@ uniform vec2 mouse;
 
 float zeta(float sigma, float t, float base, float power) {
     float sum = 0.0;
-    const int N = 100;
+    const int N = 250;
     float logBase = log(base);
 
     for (int n = 1; n <= N; ++n) {
@@ -28,8 +28,8 @@ void main() {
     float sigma = vUv.y * scale - half_scale;
     float t = vUv.x * scale - half_scale;
 
-    float base = pow(100.0, 100.0 * mouse.x);
-    float power = 0.1 + 3.0 * mouse.y;
+    float base = pow(20.0, 20.0 * mouse.x);
+    float power = 10.0 * mouse.y;
 
     float zetaValue = zeta(sigma, t, base, power);
 
