@@ -81,7 +81,7 @@
 
 {#if Geometry}
 <header>
-	<Header />
+	<!-- <Header /> -->
 </header>
 
 	<svelte:component this={Geometry} />
