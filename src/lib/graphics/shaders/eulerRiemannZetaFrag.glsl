@@ -28,7 +28,7 @@ void main() {
     float sigma = vUv.y * scale - half_scale;
     float t = vUv.x * scale - half_scale;
 
-    float base = pow(10.0, 10.0 * mouse.x);
+    float base = pow(100.0, 100.0 * mouse.x);
     float power = 0.1 + 3.0 * mouse.y;
 
     float zetaValue = zeta(sigma, t, base, power);
