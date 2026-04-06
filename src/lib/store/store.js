@@ -25,3 +25,5 @@ export function persistentStore(key, startValue) {
 }
 
 export const renderer = persistentStore('renderer', 'three');
+
+export const trigMode = writable(0); // 0=tan, 1=sin, 2=cos

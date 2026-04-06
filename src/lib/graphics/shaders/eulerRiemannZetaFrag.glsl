@@ -4,6 +4,7 @@ uniform vec3 color1;
 uniform vec3 color2;
 uniform vec3 color3;
 uniform vec2 mouse;
+uniform float trigMode;
 
 float zeta(float sigma, float t, float base, float power) {
     float sum = 0.0;
@@ -13,9 +14,18 @@ float zeta(float sigma, float t, float base, float power) {
     for (int n = 1; n <= N; ++n) {
         float term = pow(float(n), -sigma * power);
         float angle = -t * log(float(n)) / logBase;
-        float tangentValue = tan(angle);
-        if (abs(tangentValue) < 100.0) {
-            sum += term * tangentValue;
+
+        float trigValue;
+        if (trigMode < 0.5) {
+            trigValue = tan(angle);
+        } else if (trigMode < 1.5) {
+            trigValue = sin(angle);
+        } else {
+            trigValue = cos(angle);
+        }
+
+        if (abs(trigValue) < 100.0) {
+            sum += term * trigValue;
         }
     }
 
@@ -28,8 +38,8 @@ void main() {
     float sigma = vUv.y * scale - half_scale;
     float t = vUv.x * scale - half_scale;
 
-    float base = pow(20.0, 20.0 * mouse.x);
-    float power = 10.0 * mouse.y;
+    float base = pow(10.0, 10.0 * mouse.x);
+    float power = 4.0 * mouse.y;
 
     float zetaValue = zeta(sigma, t, base, power);
 
