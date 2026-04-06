@@ -1,6 +1,6 @@
 <script>
 	import { onMount, onDestroy  } from 'svelte';
-	import { screenType, mousePosition, mouseOverHeader, trigMode } from '$lib/store/store';
+	import { screenType, mousePosition, mouseOverHeader, trigMode, seriesN } from '$lib/store/store';
 	import { page } from '$app/stores';
 	import { afterNavigate } from '$app/navigation';
 
@@ -19,7 +19,6 @@
 
 	let shaderMaterial_euler_riemann_zeta, shaderMaterial_euler_riemann_zeta_simple, shaderMaterial_euler_riemann_zeta_functional, shaderMaterial_euler_riemann_zeta_real, shaderMaterial_euler_riemann_zeta_imaginary, shaderMaterial_euler_riemann_zeta_projective, shaderMaterial_xi;
 
-	// Collect all materials for easy trigMode updates
 	let allMaterials = [];
 
 	let container;
@@ -34,13 +33,12 @@
 	const clock = new THREE.Clock();
 
 	stats = new Stats()
-	stats.showPanel(0) // 0: fps, 1: ms, 2: mb, 3+: custom
-	// document.body.appendChild(stats.dom)
+	stats.showPanel(0)
 	
 	init();
 	animate();
 
-	// React to trigMode changes
+	// React to trigMode changes — all materials
 	$: {
 		const mode = $trigMode;
 		allMaterials.forEach(mat => {
@@ -48,6 +46,14 @@
 				mat.uniforms.trigMode.value = mode;
 			}
 		});
+	}
+
+	// React to seriesN changes — only the home shader
+	$: {
+		const n = $seriesN;
+		if (shaderMaterial_euler_riemann_zeta && shaderMaterial_euler_riemann_zeta.uniforms.seriesN) {
+			shaderMaterial_euler_riemann_zeta.uniforms.seriesN.value = n;
+		}
 	}
 
 	function setupShaderMaterials() {
@@ -70,11 +76,13 @@
 			color0: new THREE.Color(0x232323),
 		}
 
+		// Home shader gets the extra seriesN uniform
 		shaderMaterial_euler_riemann_zeta = new THREE.ShaderMaterial({
 			vertexShader: vertexShader,
 			fragmentShader: fragmentShader_euler_riemann_zeta,
 			uniforms: {
 				...uniformsBase,
+				seriesN: { value: $seriesN },
 				color1: { value: colors.color1 },
 				color2: { value: colors.color5 },
 				color3: { value: colors.color9 },
@@ -158,10 +166,7 @@
 		];
 	}
 
-
-
 	function updateShaderUniforms() {
-		// const elapsedTime = clock.getElapsedTime();
 	}
 
 	function init() {

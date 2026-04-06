@@ -5,6 +5,7 @@ uniform vec3 color2;
 uniform vec3 color3;
 uniform vec2 mouse;
 uniform float trigMode;
+uniform float seriesN;
 
 float zeta(float sigma, float t, float base, float power) {
     float sum = 0.0;
@@ -12,6 +13,8 @@ float zeta(float sigma, float t, float base, float power) {
     float logBase = log(base);
 
     for (int n = 1; n <= N; ++n) {
+        if (float(n) > seriesN) break;
+
         float term = pow(float(n), -sigma * power);
         float angle = -t * log(float(n)) / logBase;
 
